@@ -1,4 +1,4 @@
-const ANNIVERSARY = "2023-08-29";
+const ANNIVERSARY = "2025-09-06";
 
 /* REMOVE PRELOAD */
 window.addEventListener("load", () => {
