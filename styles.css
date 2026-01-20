@@ -193,6 +193,7 @@ button:hover {
     height: auto;
     display: block;
     background: black;
+    opacity: 1;
 }
 
 /* FINAL PAGE REVEAL */
