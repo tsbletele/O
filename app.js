@@ -50,7 +50,6 @@ function sendInvitationEmail() {
         body: JSON.stringify({
             to_email: "grizzlert@gmail.com",
             subject: "SURPRISE!!❤",
-            message: "Here’s your Valentine’s picnic invitation!"
         }),
         headers: {
             'Content-Type': 'application/json'
