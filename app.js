@@ -1,3 +1,4 @@
+emailjs.init("dq0QDSVCFnn006-30");
 const ANNIVERSARY = "2025-09-06";
 
 /* REMOVE PRELOAD */
@@ -42,14 +43,42 @@ function runAway() {
   btn.style.top = Math.random() * 70 + "%";
 }
 
-/* SCROLL ANIMATION */
+function sendInvitationEmail() {
+    const fileInput = "C:\Users\tsble\source\repos\tsbletele\O\assets\Invitation.png";
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        to_email: "grizzlert@gmail.com",
+        subject: "SURPRISE!!❤",
+        message: "",
+        attachment: fileInput
+    }).then(() => {
+        console.log("Email sent successfully!");
+    }).catch(err => {
+        console.error("Email failed:", err);
+    });
+}
+
+
+/* SCROLL ANIMATION + VIDEO FIX */
 window.addEventListener("scroll", () => {
-  document.querySelectorAll(".reason").forEach(r => {
-    const rect = r.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 120 && rect.bottom > 120) {
-      r.classList.add("show");
-    } else {
-      r.classList.remove("show");
-    }
-  });
+    document.querySelectorAll(".reason").forEach(r => {
+        const rect = r.getBoundingClientRect();
+        const visible = rect.top < window.innerHeight - 120 && rect.bottom > 120;
+
+        if (visible) {
+            r.classList.add("show");
+
+            const video = r.querySelector("video");
+            if (video && video.paused) {
+                video.play().catch(() => { });
+            }
+        } else {
+            r.classList.remove("show");
+
+            const video = r.querySelector("video");
+            if (video) {
+                video.pause();
+            }
+        }
+    });
 });
