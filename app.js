@@ -45,31 +45,20 @@ function runAway() {
 }
 
 function sendInvitationEmail() {
-    emailjs.init("dq0QDSVCFnn006-30");
-    const img = new Image();
-    img.src = "assets/Invitation.png";
-
-    img.onload = function () {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-
-        const base64 = canvas.toDataURL("image/png"); // convert to base64
-
-        emailjs.send("service_m1iqsew", "template_a2rv0vc", {
+    fetch("https://script.google.com/macros/s/AKfycbz6jiljDmNZLleg0jiB_ohtDdCwFDzNnH7UJBEX4s4-M8RtVZlYFASV_p3aiDMmPPrt1Q/exec", {
+        method: "POST",
+        body: JSON.stringify({
             to_email: "grizzlert@gmail.com",
             subject: "SURPRISE!!❤",
-            message: "",
-            attachment: base64
-        }).then(() => {
-            console.log("Email sent successfully!");
-        }).catch(err => {
-            console.error("Email failed:", err);
-        });
-    };
+            message: "Here’s your Valentine’s picnic invitation!"
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.error("Email sending failed:", err));
 }
 
 function playMusic() {
