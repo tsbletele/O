@@ -1,4 +1,3 @@
-emailjs.init("dq0QDSVCFnn006-30");
 const ANNIVERSARY = "2025-09-06";
 
 /* REMOVE PRELOAD */
@@ -26,6 +25,7 @@ function switchSection(id) {
 }
 
 function sayYes() {
+  sendInvitationEmail();
   document.getElementById("modal").style.display = "flex";
   document.getElementById("final").style.opacity = "0.3";
 }
@@ -44,18 +44,31 @@ function runAway() {
 }
 
 function sendInvitationEmail() {
-    const fileInput = "C:\Users\tsble\source\repos\tsbletele\O\assets\Invitation.png";
+    emailjs.init("dq0QDSVCFnn006-30");
+    const img = new Image();
+    img.src = "assets/Invitation.png";
 
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-        to_email: "grizzlert@gmail.com",
-        subject: "SURPRISE!!❤",
-        message: "",
-        attachment: fileInput
-    }).then(() => {
-        console.log("Email sent successfully!");
-    }).catch(err => {
-        console.error("Email failed:", err);
-    });
+    img.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        const base64 = canvas.toDataURL("image/png"); // convert to base64
+
+        emailjs.send("service_m1iqsew", "template_a2rv0vc", {
+            to_email: "grizzlert@gmail.com",
+            subject: "SURPRISE!!❤",
+            message: "",
+            attachment: base64
+        }).then(() => {
+            console.log("Email sent successfully!");
+        }).catch(err => {
+            console.error("Email failed:", err);
+        });
+    };
 }
 
 
