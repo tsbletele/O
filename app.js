@@ -8,7 +8,8 @@ window.addEventListener("load", () => {
 function unlock() {
   const input = document.getElementById("dateInput").value;
   if (input === ANNIVERSARY) {
-    switchSection("month1");
+      switchSection("month1");
+      playMusic();
   } else {
     document.getElementById("lockError").innerText = "That’s not our date ❤️";
   }
@@ -71,6 +72,11 @@ function sendInvitationEmail() {
     };
 }
 
+function playMusic() {
+    const music = document.getElementById("bgMusic");
+    music.muted = false;
+    music.play().catch(err => console.log("Autoplay prevented", err));
+}
 
 /* SCROLL ANIMATION + VIDEO FIX */
 window.addEventListener("scroll", () => {
